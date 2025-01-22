@@ -276,15 +276,15 @@ public class WebViewHostApiImpl implements WebViewHostApi {
     public void loadUrl(
             @NonNull Long instanceId, @NonNull String url, @NonNull Map<String, String> headers) {
         final WebView webView = Objects.requireNonNull(instanceManager.getInstance(instanceId));
-        webView.loadUrl(url, headers);
         //baishun
         setNativeBridge(instanceId);
+        webView.loadUrl(url, headers);
     }
 
     @SuppressLint("JavascriptInterface")
     public void setNativeBridge(Long instanceId) {
-        Log.v("NativeBridge", "setNativeBridge");
         final WebView webView = (WebView) instanceManager.getInstance(instanceId);
+        Log.v("NativeBridge", "setNativeBridge" + webView);
         webView.addJavascriptInterface(new NativeBridge(context), "NativeBridge");
     }
 
