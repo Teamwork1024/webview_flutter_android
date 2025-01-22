@@ -40,6 +40,7 @@ import io.flutter.plugins.webviewflutter.GeneratedAndroidWebView.WebViewHostApi;
 public class WebViewFlutterPlugin implements FlutterPlugin, ActivityAware {
   @Nullable private InstanceManager instanceManager;
 
+  public static BSEventChannel bsEventChannel;
   private FlutterPluginBinding pluginBinding;
   private WebViewHostApiImpl webViewHostApi;
   private JavaScriptChannelHostApiImpl javaScriptChannelHostApi;
@@ -158,6 +159,7 @@ public class WebViewFlutterPlugin implements FlutterPlugin, ActivityAware {
         binding.getApplicationContext(),
         new FlutterAssetManager.PluginBindingFlutterAssetManager(
             binding.getApplicationContext().getAssets(), binding.getFlutterAssets()));
+    bsEventChannel =  BSEventChannel.registerWith(binding);
   }
 
   @Override
@@ -165,6 +167,7 @@ public class WebViewFlutterPlugin implements FlutterPlugin, ActivityAware {
     if (instanceManager != null) {
       instanceManager.stopFinalizationListener();
       instanceManager = null;
+      BSEventChannel.channel.setStreamHandler(null);
     }
   }
 
