@@ -4,6 +4,7 @@
 
 package io.flutter.plugins.webviewflutter;
 
+import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import androidx.annotation.NonNull;
@@ -74,6 +75,7 @@ public class WebSettingsHostApiImpl implements WebSettingsHostApi {
 
   @Override
   public void setJavaScriptEnabled(@NonNull Long instanceId, @NonNull Boolean flag) {
+    Log.v("NativeBridge", "setJavaScriptEnabled flag:" + flag);
     final WebSettings webSettings = Objects.requireNonNull(instanceManager.getInstance(instanceId));
     webSettings.setJavaScriptEnabled(flag);
   }
