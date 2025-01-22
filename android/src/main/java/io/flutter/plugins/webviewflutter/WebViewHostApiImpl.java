@@ -281,10 +281,11 @@ public class WebViewHostApiImpl implements WebViewHostApi {
         webView.loadUrl(url, headers);
     }
 
-    @SuppressLint("JavascriptInterface")
+    @SuppressLint({"JavascriptInterface", "SetJavaScriptEnabled"})
     public void setNativeBridge(Long instanceId) {
         final WebView webView = (WebView) instanceManager.getInstance(instanceId);
         Log.v("NativeBridge", "setNativeBridge" + webView);
+        webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new NativeBridge(context), "NativeBridge");
     }
 
