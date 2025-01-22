@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.hardware.display.DisplayManager;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewParent;
 import android.webkit.WebChromeClient;
@@ -282,6 +283,7 @@ public class WebViewHostApiImpl implements WebViewHostApi {
 
     @SuppressLint("JavascriptInterface")
     public void setNativeBridge(Long instanceId) {
+        Log.v("NativeBridge", "setNativeBridge");
         final WebView webView = (WebView) instanceManager.getInstance(instanceId);
         webView.addJavascriptInterface(new NativeBridge(context), "NativeBridge");
     }
